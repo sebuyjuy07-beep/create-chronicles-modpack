@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="th" class="dark scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Chronicles: The Endventure - Official Modpack Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Kanit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            cog: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+            },
+            gear: {
+              card: '#141824',
+              border: '#23293b',
+              dark: '#0b0e17',
+              glow: '#ff9800',
+            }
+          },
+          animation: {
+            'spin-slow': 'spin 20s linear infinite',
+            'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+            'float': 'float 4s ease-in-out infinite',
+          },
+          keyframes: {
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+              '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0b0e17;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    .grid-bg {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    .gear-glow {
+      box-shadow: 0 0 50px -10px rgba(245, 158, 11, 0.25);
+    }
+
+    .card-glass {
+      background: rgba(20, 24, 36, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .card-glass:hover {
+      border-color: rgba(245, 158, 11, 0.35);
+      box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.15);
+    }
+  </style>
+</head>
+
+<body class="selection:bg-cog-500 selection:text-white">
+
+  <!-- Background Ambience -->
+  <div class="fixed inset-0 grid-bg pointer-events-none z-0"></div>
+  <div
+    class="fixed top-[-10%] left-[20%] w-[500px] h-[500px] bg-cog-600/15 rounded-full blur-[140px] pointer-events-none animate-pulse-glow z-0">
+  </div>
+  <div
+    class="fixed bottom-[-10%] right-[10%] w-[600px] h-[600px] bg-amber-700/10 rounded-full blur-[160px] pointer-events-none z-0">
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 border-b border-white/5 bg-gear-dark/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div
+          class="w-11 h-11 rounded-xl bg-gradient-to-br from-cog-500 to-amber-700 p-0.5 flex items-center justify-center shadow-lg shadow-cog-500/20">
+          <div class="w-full h-full bg-gear-dark rounded-[10px] flex items-center justify-center">
+            <i data-lucide="cog" class="w-6 h-6 text-cog-400 animate-spin-slow"></i>
+          </div>
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-wider text-white flex items-center gap-2">
+            CREATE CHRONICLES
+            <span
+              class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cog-500/20 text-cog-400 border border-cog-500/30">v2.0.0</span>
+          </span>
+          <p class="text-xs text-slate-400 tracking-wide">The Endventure Edition</p>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#download" class="hover:text-cog-400 transition-colors">ดาวน์โหลด</a>
+        <a href="#how-to-install" class="hover:text-cog-400 transition-colors">วิธีติดตั้ง</a>
+        <a href="#changelog" class="hover:text-cog-400 transition-colors">อัปเดตล่าสุด</a>
+        <a href="#requirements" class="hover:text-cog-400 transition-colors">สเปกแนะนำ</a>
+      </nav>
+
+      <a href="#download"
+        class="relative group overflow-hidden px-5 py-2.5 rounded-xl bg-gradient-to-r from-cog-500 to-amber-600 font-semibold text-sm text-slate-950 flex items-center gap-2 shadow-lg shadow-cog-500/25 hover:shadow-cog-500/40 transition-all hover:scale-105 active:scale-95">
+        <i data-lucide="download" class="w-4 h-4"></i>
+        <span>โหลดม็อดแพ็ก</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="relative z-10 max-w-6xl mx-auto px-6 pt-16 pb-24">
+    <div class="text-center max-w-3xl mx-auto">
+      <!-- Badge -->
+      <div
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-white/10 text-xs font-mono text-slate-300 mb-8 backdrop-blur-sm gear-glow">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Minecraft 1.21.1 • NeoForge 21.1.229 • แปลไทยสมบูรณ์</span>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight sm:leading-none mb-6">
+        ก้าวสู่ยุคเครื่องจักรกล <br>
+        <span class="bg-gradient-to-r from-cog-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">
+          และผจญภัยสู่แดน The End
+        </span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-300 mb-10 leading-relaxed font-light">
+        แพ็กรวมม็อดเล่นกับเพื่อนแบบจัดเต็ม ทั้งระบบกลไก <strong class="text-cog-400 font-medium">Create</strong>,
+        ระบบเวทมนตร์ <strong class="text-cog-400 font-medium">Iron's Spells</strong>, คลังเก็บของดิจิทัล
+        พร้อมเควสภาษาไทยอ่านง่าย และปรับแต่งประสิทธิภาพแบบลื่นไหลไร้รอยต่อ
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14" id="download">
+        <!-- Main Download Button -->
+        <a href="#" id="downloadBtn"
+          class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-cog-500 via-amber-500 to-amber-600 text-slate-950 font-bold text-base flex items-center justify-center gap-3 shadow-xl shadow-cog-500/30 hover:shadow-cog-500/50 hover:scale-105 active:scale-95 transition-all">
+          <i data-lucide="download-cloud" class="w-6 h-6"></i>
+          <div class="text-left">
+            <div class="leading-none text-xs uppercase tracking-wider text-slate-900 font-mono">CurseForge Profile</div>
+            <div class="text-lg leading-tight font-extrabold">ดาวน์โหลด v2.0.0 (.zip)</div>
+          </div>
+        </a>
+
+        <!-- Copy IP Button -->
+        <button onclick="copyServerIP()"
+          class="w-full sm:w-auto px-6 py-4 rounded-2xl card-glass text-slate-200 font-medium text-base flex items-center justify-center gap-3 hover:text-white transition-all group">
+          <i data-lucide="server" class="w-5 h-5 text-cog-400 group-hover:scale-110 transition-transform"></i>
+          <div class="text-left">
+            <div class="text-xs text-slate-400 font-mono">Server Address</div>
+            <div class="font-mono text-sm text-slate-200 flex items-center gap-2">
+              <span id="serverIpText">play.example-server.net</span>
+              <i data-lucide="copy" class="w-4 h-4 text-slate-400 group-hover:text-cog-400 transition-colors"></i>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Quick Stats / Badges -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+        <div class="card-glass rounded-xl p-4 text-center">
+          <div class="text-2xl font-bold text-white font-mono">300+</div>
+          <div class="text-xs text-slate-400 mt-1">ม็อดปรับแต่งพิเศษ</div>
+        </div>
+        <div class="card-glass rounded-xl p-4 text-center">
+          <div class="text-2xl font-bold text-cog-400 font-mono">100%</div>
+          <div class="text-xs text-slate-400 mt-1">เควสแปลไทยครบ</div>
+        </div>
+        <div class="card-glass rounded-xl p-4 text-center">
+          <div class="text-2xl font-bold text-white font-mono">6 - 8 GB</div>
+          <div class="text-xs text-slate-400 mt-1">RAM แนะนำ</div>
+        </div>
+        <div class="card-glass rounded-xl p-4 text-center">
+          <div class="text-2xl font-bold text-emerald-400 font-mono">Fast</div>
+          <div class="text-xs text-slate-400 mt-1">Sodium & Shader</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Install Section -->
+    <section id="how-to-install" class="mt-32">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-cog-400 uppercase tracking-widest mb-3">
+          <i data-lucide="wrench" class="w-4 h-4"></i>
+          Installation Guide
+        </div>
+        <h2 class="text-3xl font-bold text-white">วิธีลงม็อดใน CurseForge App (ง่ายใน 3 ขั้นตอน)</h2>
+        <p class="text-slate-400 mt-2 text-sm">ไม่ต้องลากไฟล์เอง ไม่ต้องลงทีละม็อด โหลดปุ๊บ Import ปั๊บเข้าเล่นได้ทันที
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Step 1 -->
+        <div class="card-glass rounded-2xl p-8 relative overflow-hidden group">
+          <div
+            class="absolute -right-4 -bottom-4 text-8xl font-black text-white/[0.03] select-none font-mono group-hover:text-cog-500/[0.06] transition-colors">
+            01</div>
+          <div
+            class="w-12 h-12 rounded-xl bg-cog-500/10 border border-cog-500/20 text-cog-400 flex items-center justify-center mb-6">
+            <i data-lucide="file-archive" class="w-6 h-6"></i>
+          </div>
+          <div class="text-xs font-mono text-cog-400 uppercase tracking-wider mb-1">Step 1</div>
+          <h3 class="text-xl font-bold text-white mb-3">โหลดไฟล์ .zip</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            กดปุ่ม <strong class="text-slate-200">ดาวน์โหลดม็อดแพ็ก</strong> ด้านบนเพื่อเซฟไฟล์ <code
+              class="text-xs bg-slate-900 px-2 py-0.5 rounded text-cog-300">KUY RAI I KAK-2.0.0.zip</code>
+            ลงในคอมพิวเตอร์ของคุณ (ไม่ต้องแตกไฟล์ zip ออกมา)
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="card-glass rounded-2xl p-8 relative overflow-hidden group">
+          <div
+            class="absolute -right-4 -bottom-4 text-8xl font-black text-white/[0.03] select-none font-mono group-hover:text-cog-500/[0.06] transition-colors">
+            02</div>
+          <div
+            class="w-12 h-12 rounded-xl bg-cog-500/10 border border-cog-500/20 text-cog-400 flex items-center justify-center mb-6">
+            <i data-lucide="folder-input" class="w-6 h-6"></i>
+          </div>
+          <div class="text-xs font-mono text-cog-400 uppercase tracking-wider mb-1">Step 2</div>
+          <h3 class="text-xl font-bold text-white mb-3">กด Import ใน CurseForge</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            เปิดโปรแกรม <strong class="text-slate-200">CurseForge App</strong> ไปที่แถบ Minecraft แล้วกด <strong
+              class="text-slate-200">Create Custom Profile</strong> จากนั้นเลือกเมนู <strong
+              class="text-cog-400">Import</strong> แล้วเลือกไฟล์ .zip ที่เพิ่งโหลดมา
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="card-glass rounded-2xl p-8 relative overflow-hidden group">
+          <div
+            class="absolute -right-4 -bottom-4 text-8xl font-black text-white/[0.03] select-none font-mono group-hover:text-cog-500/[0.06] transition-colors">
+            03</div>
+          <div
+            class="w-12 h-12 rounded-xl bg-cog-500/10 border border-cog-500/20 text-cog-400 flex items-center justify-center mb-6">
+            <i data-lucide="play-circle" class="w-6 h-6"></i>
+          </div>
+          <div class="text-xs font-mono text-cog-400 uppercase tracking-wider mb-1">Step 3</div>
+          <h3 class="text-xl font-bold text-white mb-3">กด Play แล้วลุยเลย!</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            รอ CurseForge ดาวน์โหลดม็อดสักครู่จนครบ 100% จากนั้นกดปุ่ม <strong
+              class="text-emerald-400 font-semibold">Play</strong> เพื่อเข้าเกม ใส่ IP เซิร์ฟเวอร์
+            แล้วชวนเพื่อนมาสร้างโรงงานด้วยกันได้เลย!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Changelog & Highlights -->
+    <section id="changelog" class="mt-32">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+        <!-- Left: What's new in v2.0.0 -->
+        <div class="card-glass rounded-3xl p-8">
+          <div class="flex items-center justify-between mb-6 pb-6 border-b border-white/5">
+            <div>
+              <div class="inline-flex items-center gap-2 text-xs font-mono text-cog-400 uppercase tracking-widest mb-1">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                Latest Release
+              </div>
+              <h2 class="text-2xl font-bold text-white">บันทึกการอัปเดต v2.0.0</h2>
+            </div>
+            <span
+              class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono">
+              Current Version
+            </span>
+          </div>
+
+          <ul class="space-y-4 text-sm text-slate-300">
+            <li class="flex items-start gap-3">
+              <span
+                class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </span>
+              <div>
+                <strong class="text-white">แก้ปัญหาเควสขึ้น "Unnamed":</strong>
+                อัปเดตโครงสร้างภาษาภาษาไทยและภาษาอังกฤษของ FTB Quests ให้แสดงผลชื่อหมวดหมู่และคำอธิบายเควสครบถ้วน
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </span>
+              <div>
+                <strong class="text-white">เพิ่มม็อดตัดไม้ (FallingTree):</strong> ตัดโคนไม้ครั้งเดียวไม้ล้มทั้งต้น
+                ประหยัดเวลาสร้างบ้าน
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </span>
+              <div>
+                <strong class="text-white">ปรับแต่งประสิทธิภาพ Sodium 0.8:</strong> เคลียร์ม็อดที่ไม่เข้ากันออก ทำให้รัน
+                Shader ได้ลื่นไหล FPS นิ่งขึ้น
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span
+                class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              </span>
+              <div>
+                <strong class="text-white">ซิงก์ตรงกับ Dedicated Server:</strong>
+                ปรับแต่งการตั้งค่าเน็ตเวิร์กให้ตรงกับเซิร์ฟเวอร์ เข้าเล่นแล้วไม่หลุด
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: System Requirements -->
+        <div class="card-glass rounded-3xl p-8" id="requirements">
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-cog-400 uppercase tracking-widest mb-1">
+            <i data-lucide="cpu" class="w-4 h-4"></i>
+            System Requirements
+          </div>
+          <h2 class="text-2xl font-bold text-white mb-6">สเปกที่แนะนำสำหรับเล่น</h2>
+
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-white/5 flex items-center justify-between">
+              <div>
+                <div class="text-xs text-slate-400">หน่วยความจำ RAM (แนะนำ)</div>
+                <div class="font-bold text-white text-base">6,144 MB – 8,192 MB (6 – 8 GB)</div>
+              </div>
+              <i data-lucide="memory-stick" class="w-6 h-6 text-cog-400"></i>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-white/5 flex items-center justify-between">
+              <div>
+                <div class="text-xs text-slate-400">Java Version</div>
+                <div class="font-bold text-white text-base">Java 21 (64-bit)</div>
+              </div>
+              <i data-lucide="coffee" class="w-6 h-6 text-amber-400"></i>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/60 border border-white/5 flex items-center justify-between">
+              <div>
+                <div class="text-xs text-slate-400">Mod Loader</div>
+                <div class="font-bold text-white text-base">NeoForge 21.1.229</div>
+              </div>
+              <i data-lucide="anvil" class="w-6 h-6 text-emerald-400"></i>
+            </div>
+          </div>
+
+          <div
+            class="mt-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300/90 leading-relaxed flex items-start gap-3">
+            <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0 mt-0.5 text-amber-400"></i>
+            <span><strong>คำแนะนำ:</strong> ในหน้า CurseForge ให้ไปที่ Settings > Minecraft แล้วปรับ <em>Allocated
+                Memory</em> ไปที่อย่างน้อย <strong>6,000 MB (6 GB)</strong>
+              เพื่อป้องกันอาการกระตุกหรือหน่วยความจำไม่พอครับ</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="mt-32 pt-8 border-t border-white/5 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        Create Chronicles: The Endventure • Custom Modpack
+      </div>
+      <div class="flex items-center gap-6 text-slate-400">
+        <a href="#download" class="hover:text-cog-400 transition-colors">ดาวน์โหลด</a>
+        <a href="#how-to-install" class="hover:text-cog-400 transition-colors">วิธีลง</a>
+        <button onclick="copyServerIP()" class="hover:text-cog-400 transition-colors">คัดลอก IP</button>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast"
+    class="fixed bottom-6 right-6 px-5 py-3 rounded-xl bg-emerald-500 text-slate-950 font-semibold text-sm flex items-center gap-2 shadow-xl shadow-emerald-500/30 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+    <i data-lucide="check-circle" class="w-5 h-5"></i>
+    <span id="toastMsg">คัดลอก IP เซิร์ฟเวอร์เรียบร้อยแล้ว!</span>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Copy Server IP
+    function copyServerIP() {
+      const ip = document.getElementById('serverIpText').innerText;
+      navigator.clipboard.writeText(ip).then(() => {
+        showToast('คัดลอก IP: ' + ip + ' แล้ว!');
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+  </script>
+</body>
+
+</html>
